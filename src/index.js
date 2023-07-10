@@ -5,24 +5,12 @@ import { store } from './app/store';
 import { BrowserRouter } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
-// import Header from './Header'
 import 'bootstrap/dist/css/bootstrap.css'
-// import Counter from './components/counter';
 import 'font-awesome/css/font-awesome.css';
-// import './vidly.css';
-// import './App.css';
 import { reduceRight } from 'lodash';
-import MainApp from './app/MainApp';
-// import Apps from './Apps';
-// // //  import Counters from './components/counters';
-// import Nav from './nav1';
-import AppStore from './appParts/sidebar';
-import './nav1.css'
-import './sideBar.css'
-import './MainApp.css'
-import './feed.css'
-import './sideBarBottom.css'
-import './home.css'
+import App from './App';
+
+
 
 
 const container = document.getElementById('root');
@@ -32,7 +20,7 @@ root.render(
   <BrowserRouter>
      <React.StrictMode>
         <Provider store={store}> 
-         <MainApp />
+         <App/>
          </Provider>
       </React.StrictMode> 
     </BrowserRouter>
