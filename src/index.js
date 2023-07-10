@@ -10,12 +10,7 @@ import 'font-awesome/css/font-awesome.css';
 import { reduceRight } from 'lodash';
 import App from './App';
 
-import './nav1.css'
-import './sideBar.css'
-import './MainApp.css'
-import './feed.css'
-import './sideBarBottom.css'
-import './home.css'
+
 
 
 const container = document.getElementById('root');
