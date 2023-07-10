@@ -1,123 +1,122 @@
-import React, { Component } from 'react';
-// import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
-import NavBar from './components/NavBar';
-import Counters from './components/counters';
+import React, { Component } from "react";
+import SideBar from "../components/sidebar";
+import SideBarBottom from "../components/sideBarBottom";
+import { InfoList } from "../info";
+import { getInfoList } from "../info";
+import "bootstrap/dist/css/bootstrap.css";
+import Feed from "../components/feed";
+import Nav from "../components/nav1";
+import { paginate } from "../utilities/paginate1";
+import reviews from "../app/data";
+import { Route, Redirect, Switch } from "react-router-dom";
+import NotFound from "../pages/NotFound";
+import LoginForm from "../pages/Login";
+import Register from "../pages/Register";
+import homePage from "../pages/home";
+import sideMenu from "../components/sidebar2";
 
-class  App extends Component  {
+class App extends Component {
   state = {
-    items: [
-        { id : 1, value : 0},
-        { id : 2, value : 0},
-        { id : 3, value : 0},
-        { id : 4, value : 0 },
-    ]
-} 
-handleDelete = counterId => {
-    console.log('Event Handler Called',counterId)
-    const items = this.state.items.filter(i => 
-        i.id !== counterId)
-    this.setState({items : items})
+    List: InfoList,
+    onList: getInfoList(),
+    status: "student",
+    data: reviews,
+    pageSize: 3,
+    currentPage: 1,
+  };
+
+  handleSwitchList = (listItem) => {
+    this.setState({ selectedList: listItem });
+    // console.log(listItem.name)
+  };
+  handleSwitch = (page) => {
+    this.setState({ currentPage: page });
+    console.log(page);
+  };
+
+  render() {
+    const persons = paginate(
+      this.state.data,
+      this.state.currentPage,
+      this.state.pageSize
+    );
+
+    return (
+      <div className="app">
+        <Nav />
+        <div className="app-body">
+          <div className="feed">
+            <Switch>
+              <Route path="/homePage" component={homePage} />
+
+              <Route path="/movies/:id" exact component={Movie} />
+              <Route path="/movies" component={homePage} />
+              <Route
+                path="/news"
+                render={(props) => (
+                  <SideBarBottom
+                    reviews={this.state.data}
+                    pageSize={this.state.pageSize}
+                    currentPage={this.state.currentPage}
+                    switchPage={this.handleSwitch}
+                    persons={persons}
+                    {...props}
+                  />
+                )}
+              />
+              <Route
+                path="/register"
+                render={(props) => (
+                  <Register data={this.state.data} {...props} />
+                )}
+              />
+              <Route path="/login" component={LoginForm} />
+              <Route path="/not-found" component={NotFound} />
+              <Route
+                path="/home"
+                render={(props) => (
+                  <Feed
+                    items={this.state.onList}
+                    status={this.state.status}
+                    selectedItem={this.state.selectedList}
+                    switchList={this.handleSwitch}
+                    {...props}
+                  />
+                )}
+              />
+              <Route
+                path="/News"
+                render={(props) => (
+                  <div className="sbBottom">
+                    <SideBarBottom
+                      reviews={this.state.data}
+                      pageSize={this.state.pageSize}
+                      currentPage={this.state.currentPage}
+                      switchPage={this.handleSwitch}
+                      persons={persons}
+                      {...props}
+                    />
+                  </div>
+                )}
+              />
+              <Route
+                exact
+                path="/"
+                render={(props) => (
+                  <Feed items={this.state.onList} {...props} />
+                )}
+              />
+              <Redirect from="/" to="/movies" />
+              <Redirect to="/not-found" />
+            </Switch>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
-handleReset = () => {
-    const items = this.state.items.map(i => {i.value = 0;
-        return i});
-    this.setState({ items : items})
-}
-
-handleIncrement = (item) => {
-    const items = [...this.state.items];
-    const index = items.indexOf(item);
-    items[index] = {...item}
-    items[index].value++;
-    this.setState({items})
-}
-handleRemove = (item) => {
-  const items = [...this.state.items];
-  const index = items.indexOf(item);
-  items[index] = {...item};
-  items[index].value=items[index].value - 1;
-  this.setState({items})
-
-}
-   
-render() {
-  return (
-    <React.Fragment>
-      
-        <NavBar totalCounters={this.state.items.filter(c => c.value !== 0).length}/>
-          <main className='container'>
-                <Counters onReset={this.handleReset} onDelete={this.handleDelete} 
-                onIncrement={this.handleIncrement} onRemove={this.handleRemove} items={this.state.items}/>
-        </main>
-            
-         </React.Fragment>
-          );
-        }
-}
-;
 export default App;
-  
-        
-      
-
-
-
-
-
-
-
-
-
-
-
-
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Lets Build a react App </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header> */}
-    
- 
+{
+  /* <SideBarBottom /> */
+}

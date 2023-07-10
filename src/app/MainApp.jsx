@@ -1,20 +1,19 @@
 import React, { Component } from "react";
-import SideBar from "../appParts/sidebar";
-import SideBarBottom from "../appParts/sideBarBottom";
+import SideBar from "../components/sidebar";
+import SideBarBottom from "../components/sideBarBottom";
 import { InfoList } from "../info";
 import { getInfoList } from "../info";
 import "bootstrap/dist/css/bootstrap.css";
-import Feed from "../appParts/feed";
-import Nav from "../nav1";
+import Feed from "../components/feed";
+import Nav from "../components/nav1";
 import { paginate } from "../utilities/paginate1";
 import reviews from "../app/data";
 import { Route, Redirect, Switch } from "react-router-dom";
-import Movie from "../linkComponents/Movie";
-import NotFound from "../linkComponents/NotFound";
-import LoginForm from "../linkComponents/Login";
-import Register from "../linkComponents/Register";
-import homePage from "../appParts/home";
-import sideMenu from "../appParts/sidebar2";
+import NotFound from "../pages/NotFound";
+import LoginForm from "../pages/Login";
+import Register from "../pages/Register";
+import homePage from "../pages/home";
+import sideMenu from "../components/sidebar2";
 
 class MainApp extends Component {
   state = {
@@ -46,11 +45,6 @@ class MainApp extends Component {
       <div className="app">
         <Nav />
         <div className="app-body">
-          {/* <SideBar items={this.state.onList} 
-                        status={this.state.status}
-                        switchList={this.handleSwitchList} 
-                        selectedItem={this.state.selectedList} /> */}
-          {/* {/* <Feed  items={this.state.onList}/>} */}
           <div className="feed">
             <Switch>
               <Route path="/homePage" component={homePage} />
