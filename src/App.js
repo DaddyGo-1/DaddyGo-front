@@ -8,116 +8,38 @@ import Feed from "./components/feed";
 import Nav from "./components/nav1";
 import { paginate } from "./utilities/paginate1";
 import reviews from "./app/data";
-import { Route, Redirect, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import NotFound from "./pages/NotFound";
 import LoginForm from "./pages/Login";
 import Register from "./pages/Register";
-import homePage from "./pages/home";
-import sideMenu from "./components/sidebar2";
-import './assets/styling/nav1.css'
-import './assets/styling/sideBar.css'
-import './assets/styling/MainApp.css'
-import './assets/styling/feed.css'
-import './assets/styling/sideBarBottom.css'
-import './assets/styling/home.css'
+import HomePage from "./pages/home";
+import { AppContextProvider } from "./context/ContextProvider";
+import "./assets/styling/nav1.css";
+import "./assets/styling/sideBar.css";
+import "./assets/styling/MainApp.css";
+import "./assets/styling/feed.css";
+import "./assets/styling/sideBarBottom.css";
+import "./assets/styling/home.css";
 
-class App extends Component {
-  state = {
-    List: InfoList,
-    onList: getInfoList(),
-    status: "student",
-    data: reviews,
-    pageSize: 3,
-    currentPage: 1,
-  };
+function App() {
+  return (
+    <div className="app">
+      <AppContextProvider>
+        <Router>
+          <Routes>
+            <Route path='/' element={<HomePage />} />
+            <Route path='/register' element={<Register />} />
+            <Route path='/login' element={<LoginForm />} />
 
-  handleSwitchList = (listItem) => {
-    this.setState({ selectedList: listItem });
-    // console.log(listItem.name)
-  };
-  handleSwitch = (page) => {
-    this.setState({ currentPage: page });
-    console.log(page);
-  };
+          </Routes>
+        </Router>
+      </AppContextProvider>
+    </div>
+  );
 
-  render() {
-    const persons = paginate(
-      this.state.data,
-      this.state.currentPage,
-      this.state.pageSize
-    );
-
-    return (
-      <div className="app">
-        <Nav />
-        <div className="app-body">
-          <div className="feed">
-            <Switch>
-              <Route path="/homePage" component={homePage} />
-              <Route
-                path="/news"
-                render={(props) => (
-                  <SideBarBottom
-                    reviews={this.state.data}
-                    pageSize={this.state.pageSize}
-                    currentPage={this.state.currentPage}
-                    switchPage={this.handleSwitch}
-                    persons={persons}
-                    {...props}
-                  />
-                )}
-              />
-              <Route
-                path="/register"
-                render={(props) => (
-                  <Register data={this.state.data} {...props} />
-                )}
-              />
-              <Route path="/login" component={LoginForm} />
-              <Route path="/not-found" component={NotFound} />
-              <Route
-                path="/home"
-                render={(props) => (
-                  <Feed
-                    items={this.state.onList}
-                    status={this.state.status}
-                    selectedItem={this.state.selectedList}
-                    switchList={this.handleSwitch}
-                    {...props}
-                  />
-                )}
-              />
-              <Route
-                path="/News"
-                render={(props) => (
-                  <div className="sbBottom">
-                    <SideBarBottom
-                      reviews={this.state.data}
-                      pageSize={this.state.pageSize}
-                      currentPage={this.state.currentPage}
-                      switchPage={this.handleSwitch}
-                      persons={persons}
-                      {...props}
-                    />
-                  </div>
-                )}
-              />
-              <Route
-                exact
-                path="/"
-                render={(props) => (
-                  <Feed items={this.state.onList} {...props} />
-                )}
-              />
-              <Redirect from="/" to="/movies" />
-              <Redirect to="/not-found" />
-            </Switch>
-          </div>
-        </div>
-      </div>
-    );
-  }
 }
 
-export default App;
 
+
+
+export default App;

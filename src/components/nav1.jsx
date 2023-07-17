@@ -54,19 +54,6 @@ class Nav extends Component {
           </div>
         </nav>
 
-        <div className="header-left">
-          <div className="header-right-search-icon">
-            <FaSearch />
-            <input type="text" />
-          </div>
-
-          <div className="header-left-user-icon">
-            <FaAddressBook size={40} />
-          </div>
-          <div>
-            <FaCaretDown size={30} />
-          </div>
-        </div>
       </nav>
     );
   }
