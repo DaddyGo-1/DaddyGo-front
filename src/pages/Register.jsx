@@ -1,175 +1,198 @@
-import { object } from "prop-types";
-import React, { Component } from "react";
+import React, { useState } from "react";
 import Joi from "joi-browser";
-import reviews, { getReviews } from "../app/data";
+import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router';
+import { useAuth } from "../context/AuthContext";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../firebase";
 
-export default class Register extends Component {
-  state = {
-    data: this.props.data,
-    account: { name: "", password: "", job: "", text: "", id: "" },
-    errors: {},
-  };
+const Register = (props) => {
+  const [user, setUser] = useState({ name: "", email: "", password: "" });
+  const [errors, setErrors] = useState({});
 
-  schema = {
+  const schema = {
     name: Joi.string().required().min(5).label("Username"),
     id: Joi.string().required().min(2).label("id"),
     password: Joi.string().required().min(5).label("Password"),
     text: Joi.string().required().min(5).label("Text"),
     job: Joi.string().required().min(5).max(15).label("Job"),
   };
-  validate = () => {
-    const result = Joi.validate(this.state.account, this.schema, {
+
+  const { signUp, Uid } = useAuth();
+  const navigate = useNavigate();
+
+  const validate = () => {
+    const result = Joi.validate(user, schema, {
       abortEarly: false,
     });
-    // console.log(result)
+
     if (!result.error) return null;
+
     const errors = {};
-    for (let item of result.error.details) errors[item.path[0]] = item.message;
+    for (let item of result.error.details) {
+      errors[item.path[0]] = item.message;
+    }
     return errors;
   };
-  validateProperty = (input) => {
+
+  const validateProperty = (input) => {
     const obj = { [input.name]: input.value };
-    const schema = { [input.name]: this.schema[input.name] };
+    const schema = { [input.name]: schema[input.name] };
     const { error } = Joi.validate(obj, schema);
     return error ? error.details[0].message : null;
   };
 
-  handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const errors = this.validate();
-    this.setState({ errors: errors || {} });
-    if (errors) return;
-    // console.log( 'submitted')
-    // id = e.target.id.value
-    // name = e.target.name.value
-    // job = e.target.job.value
-    // password = e.target.password.value
-    // text = e.target.text.value;
-    // let {id, name, job, password, text} = inputs
-    // this.setState({account : inputs})
-    let account = { ...this.state.account };
-    account[e.currentTarget.name] = e.currentTarget.value;
-    //const account = {...this.state.data, [e.currentTarget.name] : e.currentTarget.value }
-    // console.log( this.state.data)
-    this.setState({ account });
-    const account1 = [this.state.account, ...this.state.data];
-    console.log(account1);
+
+    try {
+      await signUp(user.email, user.password);
+
+      await setDoc(doc(db, "users", Uid[0]), {
+        name: user.name,
+        email: user.name,
+        admin: false,
+      });
+
+      // Perform redirection after successful registration
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      setErrors(error)
+    }
   };
 
-  handleChange = (e) => {
-    const errors = { ...this.state.errors };
-    const errorMessage = this.validateProperty(e.currentTarget);
-    if (errors) errors[e.currentTarget.name] = errorMessage;
-    else delete errors[e.currentTarget.name];
+  const handleChange = (e) => {
+    const updatedUser = { ...user };
+    updatedUser[e.target.name] = e.target.value;
 
-    const account = { ...this.state.account };
-    account[e.currentTarget.name] = e.currentTarget.value;
-    this.setState({ account: account, errors: errors });
+    setUser(updatedUser);
   };
-  render() {
+  // render() {
     return (
-      <div>
-        <h1>Post Info</h1>
+      <div className=" min-h-full  w-full md:max-w-md lg:max-w-full md:mx-auto px-6 lg:px-16 pt-16">
+        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+          <img
+            className="mx-auto h-10 w-auto"
+            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+            alt="Your Company"
+          />
+          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+            Sign in to your account
+          </h2>
+        </div>
 
-        <form onSubmit={this.handleSubmit}>
-          <div className="form-group">
-            <label for="exampleInputEmail1">Name</label>
-            <input
-              type="text"
-              name="name"
-              onChange={this.handleChange}
-              value={this.state.account.name}
-              className="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
-              placeholder="Username"
-            />
-            {this.state.errors.name && (
-              <div className="alert alert-danger">{this.state.errors.name}</div>
-            )}
-          </div>
-          <div className="form-group">
-            <label for="exampleInputEmail1">id</label>
-            <input
-              type="number"
-              name="id"
-              onChange={this.handleChange}
-              value={this.state.account.id}
-              className="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
-              placeholder="Enter id"
-            />
-            {this.state.errors.id && (
-              <div className="alert alert-danger">{this.state.errors.id}</div>
-            )}
-          </div>
-          <div className="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input
-              type="password"
-              name="password"
-              onChange={this.handleChange}
-              value={this.state.account.password}
-              className="form-control"
-              id="exampleInputPassword1"
-              placeholder="Password"
-            />
-            {this.state.errors.password && (
-              <div className="alert alert-danger">
-                {this.state.errors.password}
+        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+          <form className="space-y-6">
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Full Name
+              </label>
+              <div className="mt-2">
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  autoComplete="name"
+                  onChange={handleChange}
+                  required
+                  className="block w-full rounded-md border px-3 py-2 text-gray-900 focus:border focus:border-indigo-500 focus:outline-none"
+                />
               </div>
-            )}
-          </div>
-          <div className="form-group">
-            <label for="exampleInputPassword1">Job</label>
-            <input
-              type="text"
-              className="form-control"
-              name="job"
-              onChange={this.handleChange}
-              value={this.state.account.job}
-              id="exampleInputPassword1"
-              placeholder="Job title"
-            />
-            {this.state.errors.job && (
-              <div className="alert alert-danger">{this.state.errors.job}</div>
-            )}
-          </div>
-          <div className="form-group">
-            <label for="exampleInputPassword1">Text</label>
-            <textarea
-              type="text"
-              className="form-control"
-              name="text"
-              onChange={this.handleChange}
-              value={this.state.account.text}
-              id="exampleInputPassword1"
-              placeholder="Enter text"
-            />
-            {this.state.errors.text && (
-              <div className="alert alert-danger">{this.state.errors.text}</div>
-            )}
-          </div>
-          <div className="form-check">
-            <input
-              type="checkbox"
-              className="form-check-input"
-              id="exampleCheck1"
-            />
-            <label className="form-check-label" for="exampleCheck1">
-              Prove you're not a robot
-            </label>
-          </div>
-          <button
-            type="submit"
-            disabled={this.validate()}
-            className="btn btn-primary"
-          >
-            Submit
-          </button>
-        </form>
+            </div>
+
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Email address
+              </label>
+              <div className="mt-2">
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  
+                  onChange={handleChange}
+                  required
+                  className="block w-full rounded-md border px-3 py-2 text-gray-900 focus:border-blue focus:outline-none"
+                />
+              </div>
+            </div>
+
+            <div>
+              <div className="flex items-center justify-between">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                  Password
+                </label>
+                <div className="text-sm">
+                  <Link
+                    to="#"
+                    className="font-semibold text-indigo-600 hover:text-indigo-500"
+                  >
+                    Forgot password?
+                  </Link>
+                </div>
+              </div>
+              <div className="mt-2">
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  autoComplete="current-password"
+               
+                  onChange={handleChange}
+                  required
+                  className="block w-full rounded-md border-0 px-3 py-2 text-gray-900  ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1   focus:border-blue-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+
+            <div>
+              <button
+                type="submit"
+                onClick={handleSubmit}
+                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold leading-6 text-white  hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                Register
+              </button>
+            </div>
+            <hr className="my-6 border-gray-300 w-full" />
+
+            <button
+              type="button"
+              className="w-full block bg-white hover:bg-gray-100 focus:bg-gray-100 text-gray-900 font-semibold rounded-lg px-4 py-2 border border-gray-300"
+            >
+              <div className="flex items-center justify-center">
+                <img
+                  src="https://tailus.io/sources/blocks/social/preview/images/google.svg"
+                  className=" w-5"
+                  alt="google logo"
+                ></img>
+                <span className="ml-4 ">Log in with Google</span>
+              </div>
+            </button>
+          </form>
+
+          <p className="mt-10 text-center text-sm text-gray-500">
+            Already have an account?{" "}
+            <Link
+              to="/login"
+              className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+            >
+              Sign in
+            </Link>
+          </p>
+        </div>
       </div>
     );
   }
-}
+  export default Register;
