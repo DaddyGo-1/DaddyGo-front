@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import StripePagination from '../app/paginationForStripe';
+import StripePagination from './paginationForStripe';
 
 class SideBarBottom extends Component {
    

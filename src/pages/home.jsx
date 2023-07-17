@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import Nav from '../components/nav1';
 
-class homePage extends Component {
+class HomePage extends Component {
     state = {  } 
     render() { 
         return (
+          <div>
+          <Nav/>
             <section class="hero">
       <div class="hero-center">
         <article class="hero-info">
@@ -23,8 +26,9 @@ class homePage extends Component {
         </article>
       </div>
     </section>
+    </div>
         );
     }
 }
  
-export default homePage;
+export default HomePage;
