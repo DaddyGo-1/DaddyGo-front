@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router';
 import { useAuth } from "../context/AuthContext";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
+import logo from '../assets/images/Nuesa.jpg';
 
 const Register = (props) => {
   const [user, setUser] = useState({ name: "", email: "", password: "" });
@@ -73,8 +74,8 @@ const Register = (props) => {
       <div className=" min-h-full  w-full md:max-w-md lg:max-w-full md:mx-auto px-6 lg:px-16 pt-16">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
-            className="mx-auto h-10 w-auto"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+            className="mx-auto h-20 w-auto"
+            src={logo}
             alt="Your Company"
           />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
