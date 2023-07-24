@@ -1,0 +1,17 @@
+.main-layout{
+    margin-top: 100px;
+    &__top {
+        background: #0d1321 0% 0% no-repeat padding-box;
+        opacity: 1;
+        padding-top: 320px;
+        position: fixed;
+        top: 0;
+        width: 100%;
+      }
+      &__main {
+        position: absolute;
+        width: 100%;
+        top: 150px;
+        margin-bottom: 40px;
+      }
+}
