@@ -2,8 +2,6 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
 import "./index.css";
-import "bootstrap/dist/css/bootstrap.css";
-import "font-awesome/css/font-awesome.css";
 import { reduceRight } from "lodash";
 import App from "./App";
 
@@ -20,13 +18,3 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
-{
-  /* <React.StrictMode>
-//         <Provider store={store}>
-//           <BrowserRouter>
-//             {/* <Nav /> */
-}
-//             <MainApp />
-//           </BrowserRouter>
-//         </Provider>
-// </React.StrictMode> */}
