@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import NavBar from "../components/NavBar";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 
@@ -29,7 +29,7 @@ function FullPost() {
       {/* <Nav /> */}
       <NavBar />
       <div className="main-layout ">
-        <div className="mx-auto max-w-6xl  ">
+        <div className="mx-auto max-w-6xl  mb-20">
           <div className="">
             <div
               className="mb-4 md:mb-0 w-full max-w-screen-md mx-auto relative"

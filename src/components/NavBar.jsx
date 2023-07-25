@@ -54,7 +54,7 @@ function NavBar(props) {
               <li>
                 <CustomLink
                   to="/"
-                  className="block py-2 pl-3 pr-4   md:bg-transparent md:text-indigo-700 md:p-0 md:dark:text-indigo-500"    
+                  className="block py-2 pl-3 pr-4 text-gray-900  md:hover:bg-transparent md:hover:text-indigo-500 md:p-0 md:dark:hover:text-indigo-500 dark:text-indigo  dark:hover:text-indigo md:dark:hover:bg-transparent "
                 >
                   Home
                 </CustomLink>
@@ -90,7 +90,7 @@ function CustomLink({ to, children, ...props }) {
   const resolvedPath = useResolvedPath(to);
   const isActive = useMatch({ path: resolvedPath.pathname })
   return (
-      <Link  aria-current={ isActive ? "page": ''} to={to} {...props}>
+      <Link className={isActive ? "active-link": ''} to={to} {...props}>
           {children}
       </Link>
   )
