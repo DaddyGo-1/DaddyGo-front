@@ -1,5 +1,4 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import BlogCard from "../components/BlogCard";
 
@@ -26,11 +25,7 @@ function Adverts() {
         </h5> */}
         <div className="mx-auto grid max-w-6xl  grid-cols-1 gap-6 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 ">
           <BlogCard />
-          <BlogCard />
-          <BlogCard />
-          <BlogCard />
-          <BlogCard />
-          <BlogCard />
+        
         </div>
         </div>
       

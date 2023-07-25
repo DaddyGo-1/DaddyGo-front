@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-export default () => {
+export default function MobileNav (){
 
   const [state, setState] = useState(false)
 

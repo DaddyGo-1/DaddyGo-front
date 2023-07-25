@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
-import Nav from "../components/MobileNav";
 import NavBar from "../components/NavBar";
 
 class HomePage extends Component {
@@ -10,7 +9,7 @@ class HomePage extends Component {
       <div>
         {/* <Nav /> */}
         <NavBar/>
-        <section class="hero">
+        {/* <section class="hero">
           <div class="hero-center">
             <article class="hero-info">
               <h1>
@@ -30,7 +29,11 @@ class HomePage extends Component {
               <img src="./images/phone.svg" class="img" alt="" />
             </article>
           </div>
-        </section>
+        </section> */}
+
+        <h1 className="mt-36 text-center">
+        Page currently under construction
+        </h1>
       </div>
     );
   }

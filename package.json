@@ -19,6 +19,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
+    "react-quill": "^2.0.0",
     "react-redux": "^8.0.5",
     "react-router": "^6.0.1",
     "react-router-dom": "^6.0.1",
@@ -51,9 +52,10 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "",
+    "@tailwindcss/typography": "^0.5.9",
     "autoprefixer": "^10.4.14",
     "postcss": "^8.4.26",
-    "tailwindcss": "^3.3.3",
-    "@babel/plugin-proposal-private-property-in-object": ""
+    "tailwindcss": "^3.3.3"
   }
 }
