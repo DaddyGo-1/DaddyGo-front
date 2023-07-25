@@ -72,7 +72,6 @@ function NavBar(props) {
               <li>
                 <CustomLink
                   to="/adverts"
-                  // className="block py-2 pl-3 pr-4 text-gray-900  md:hover:bg-transparent md:hover:text-indigo-500 md:p-0 md:dark:hover:text-indigo-500 dark:text-indigo  dark:hover:text-indigo-500 md:dark:hover:bg-transparent "
                 >
                   Adverts
                 </CustomLink>
