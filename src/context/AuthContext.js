@@ -11,6 +11,7 @@ export function useAuth() {
 
 export function AuthProvider({ children }) {
     const [currentUser, setCurrentUser] = useState();
+    // eslint-disable-next-line no-unused-vars
     const [Uid, setUid] = useState([]);
 
     const signUp = async (email, password) => {

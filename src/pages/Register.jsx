@@ -121,7 +121,7 @@ const Register = (props) => {
                   
                   onChange={handleChange}
                   required
-                  className="block w-full rounded-md border px-3 py-2 text-gray-900 focus:border-blue focus:outline-none"
+                  className="block w-full rounded-md border px-3 py-2 text-gray-900 focus:border focus:border-indigo-500 focus:outline-none"
                 />
               </div>
             </div>
@@ -152,7 +152,7 @@ const Register = (props) => {
                
                   onChange={handleChange}
                   required
-                  className="block w-full rounded-md border-0 px-3 py-2 text-gray-900  ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1   focus:border-blue-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border px-3 py-2 text-gray-900 focus:border focus:border-indigo-500 focus:outline-none"
                 />
               </div>
             </div>
