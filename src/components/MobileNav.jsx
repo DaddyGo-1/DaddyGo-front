@@ -1,68 +1,81 @@
-import { useState } from 'react'
+import React, { useState } from "react";
+import { Link, useMatch, useResolvedPath } from "react-router-dom";
 
-export default function MobileNav (){
+// import PodModal from "../Modals/PodModal";
+import { useAuth } from "../context/AuthContext";
 
-  const [state, setState] = useState(false)
-
-  // Replace javascript:void(0) path with your path
-  const navigation = [
-      { title: "Customers", path: "javascript:void(0)" },
-      { title: "Careers", path: "javascript:void(0)" },
-      { title: "Guides", path: "javascript:void(0)" },
-      { title: "Partners", path: "javascript:void(0)" }
-  ]
+function MobileNav() {
+  const [showMenu, setShowMenu] = useState(false);
+  const {currentUser } = useAuth()
+  const [modalShow, setModalShow] = useState(false);
 
   return (
-      <nav className="bg-white w-full border-b md:border-0 md:static">
-          <div className="items-center px-4 max-w-screen-xl mx-auto md:flex md:px-8">
-              <div className="flex items-center justify-between py-3 md:py-5 md:block">
-                    <a href="javascript:void(0)">
-                        <img
-                            src="https://www.floatui.com/logo.svg" 
-                            width={120} 
-                            height={50}
-                            alt="Float UI logo"
-                        />
-                    </a>
-                  <div className="md:hidden">
-                      <button className="text-gray-700 outline-none p-2 rounded-md focus:border-gray-400 focus:border"
-                          onClick={() => setState(!state)}
-                      >
-                          {
-                              state ? (
-                                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
-                                      <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-                                  </svg>
-                              ) : (
-                                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8h16M4 16h16" />
-                                  </svg>
-                              )
-                          }
-                      </button>
-                  </div>
-              </div>
-              <div className={`flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0 ${ state ? 'block' : 'hidden'}`}>
-                  <ul className="justify-center items-center space-y-8 md:flex md:space-x-6 md:space-y-0">
-                      {
-                          navigation.map((item, idx) => {
-                              return (
-                                <li key={idx} className="text-gray-600 hover:text-indigo-600">
-                                    <a href={item.path}>
-                                        { item.title }
-                                    </a>
-                                </li>
-                              )
-                          })
-                      }
-                  </ul>
-              </div>
-              <div className="hidden md:inline-block">
-                <a href="javascript:void(0)" className="py-3 px-4 text-white bg-indigo-600 hover:bg-indigo-700 rounded-md shadow">
-                    Get Started
-                </a>
-              </div>
-          </div>
-      </nav>
-  )
+    <>
+      {/* <PodModal show={modalShow} onHide={() => setModalShow(false)} /> */}
+      <div className="MobileNav">
+        {/* <img
+          src={menu}
+          alt="menu"
+          className="menu"
+          onClick={() => {
+            setShowMenu(!showMenu);
+          }}
+        /> */}
+           <button
+            data-collapse-toggle="navbar-cta"
+            type="button"
+            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400  dark:focus:ring-gray-600"
+            aria-controls="navbar-cta"
+            aria-expanded="false"
+            // onClick={() => {
+            //     setShowMenu(!showMenu);
+            //   }}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 8h16M4 16h16"
+              />
+            </svg>
+          </button>
+
+        <div className={`MobileNav__list ${showMenu ? "meuDIsplay" : ""}`}>
+          {/* <div className='desktop'> */}
+          <li>
+            <CustomLink to="/">Home</CustomLink>
+          </li>
+          <li>
+            <CustomLink to="/news">News</CustomLink>
+          </li>
+          <li>
+            <CustomLink
+              to="/adverts"
+              // className="block py-2 pl-3 pr-4 text-gray-900  md:hover:bg-transparent md:hover:text-indigo-500 md:p-0 md:dark:hover:text-indigo-500 dark:text-indigo  dark:hover:text-indigo-500 md:dark:hover:bg-transparent "
+            >
+              Adverts
+            </CustomLink>
+          </li>
+        </div>
+      </div>
+    </>
+  );
 }
+function CustomLink({ to, children, ...props }) {
+  const resolvedPath = useResolvedPath(to);
+  const isActive = useMatch({ path: resolvedPath.pathname });
+  return (
+    <Link className={isActive ? "pageActive" : ""} to={to} {...props}>
+      {children}
+    </Link>
+  );
+}
+
+export default MobileNav;
