@@ -1,7 +1,8 @@
 import React, { useContext, useState } from 'react';
-import { auth } from '../firebase';
+import { auth, db } from '../firebase';
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { useEffect } from 'react';
+import { doc, getDoc } from '@firebase/firestore';
 
 const AuthContext = React.createContext();
 
@@ -11,6 +12,7 @@ export function useAuth() {
 
 export function AuthProvider({ children }) {
     const [currentUser, setCurrentUser] = useState();
+    const [userData, setUserData] = useState([]);
     // eslint-disable-next-line no-unused-vars
     const [Uid, setUid] = useState([]);
 
@@ -35,13 +37,36 @@ export function AuthProvider({ children }) {
             unsub();
         }
     }, []);
+    useEffect(() => {
+        const getData = async () => {
+          try {
+            if (currentUser) {
+              const docRef = doc(db, "users", currentUser?.uid);
+              const docSnap = await getDoc(docRef);
+    
+              if (docSnap.exists()) {
+                setUserData(docSnap.data());
+              } else {
+                console.log("No such document!");
+              }
+            }
+          } catch (err) {
+            console.log(err);
+          }
+        };
+    
+        getData();
+      }, []);
+
+      console.log(userData);
 
     const value = {
         currentUser,
         signUp,
         logIn,
         logOut,
-        Uid
+        Uid,
+        userData
 
 
     }

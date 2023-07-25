@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { collection, onSnapshot, query } from 'firebase/firestore';
-import { db } from '../firebase'; // Replace with the correct path to your firebase.js file
+import { db } from '../firebase';
+import { useAuth } from './AuthContext';
 
 const PostsContext = createContext();
 
@@ -10,6 +11,8 @@ export function usePosts() {
 
 export function PostsProvider({ children }) {
   const [posts, setPosts] = useState([]);
+  const {currentUser} = useAuth()
+  console.log(currentUser);
 
   useEffect(() => {
     const unsub = onSnapshot(
