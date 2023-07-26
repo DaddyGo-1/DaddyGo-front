@@ -39,10 +39,19 @@ function NavBar(props) {
             </button>
           ) : (
             <div className="hidden md:flex justify-between ">
-              <button className="block   text-white bg-indigo-600 hover:bg-indigo-500 font-medium rounded-lg text-md px-10 py-2 text-center mr-3  dark:bg-indigo-600 dark:hover:bg-indigo-700">
+              <button className="block   text-white bg-indigo-600 hover:bg-indigo-500 font-medium rounded-lg text-md px-10 py-2 text-center mr-3  dark:bg-indigo-600 dark:hover:bg-indigo-700
+              "
+              onClick={()=>{
+                navigate("/register");
+              }}
+              >
                 Register
               </button>
-              <button className="block   border border-indigo-500 bg-white text-indigo-500 font-medium rounded-lg text-md px-10 py-2 text-center md:mr-0 hover:bg-indigo-600 hover:text-white">
+              <button className="block   border border-indigo-500 bg-white text-indigo-500 font-medium rounded-lg text-md px-10 py-2 text-center md:mr-0 hover:bg-indigo-600 hover:text-white"
+                onClick={()=>{
+                  navigate("/login");
+                }}
+              >
                 Login
               </button>
             </div>
@@ -95,10 +104,18 @@ function NavBar(props) {
             )}
             {!currentUser ? (
               <div className="w-full">
-                <button className="block md:hidden w-1/2 text-white bg-indigo-600 hover:bg-indigo-500 font-medium rounded-lg text-md px-10 py-2 text-center mx-auto md:mr-3 dark:bg-indigo-600 dark:hover:bg-indigo-700 mb-4 mt-10 ">
+                <button className="block md:hidden w-1/2 text-white bg-indigo-600 hover:bg-indigo-500 font-medium rounded-lg text-md px-10 py-2 text-center mx-auto md:mr-3 dark:bg-indigo-600 dark:hover:bg-indigo-700 mb-4 mt-10 "
+                  onClick={()=>{
+                    navigate("/register");
+                  }}
+                >
                   Register
                 </button>
-                <button className="block md:hidden w-1/2 border border-indigo-500 bg-white text-indigo-500 font-medium rounded-lg text-md px-10 py-2 text-center mx-auto md:mr-3  hover:bg-indigo-600 hover:text-white ">
+                <button className="block md:hidden w-1/2 border border-indigo-500 bg-white text-indigo-500 font-medium rounded-lg text-md px-10 py-2 text-center mx-auto md:mr-3  hover:bg-indigo-600 hover:text-white "
+                  onClick={()=>{
+                    navigate("/login");
+                  }}
+                >
                   Login
                 </button>
               </div>

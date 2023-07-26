@@ -18,22 +18,22 @@ function BlogCard() {
               }}
               key={index}
             >
-              <img
+           <div className="image-container">
+           <img
                 class="w-full"
                 src={post.image}
                 alt="Mountain"
               />
+           </div>
               <div class="px-6 py-4">
                 <div class="font-bold text-xl mb-2">{post.title}</div>
-                <p class="text-gray-700 text-base">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Voluptatibus quia, Nonea! Maiores et perferendis eaque,
-                  exercitationem praesentium nihil.
+                <p class="text-gray-700 text-base"  dangerouslySetInnerHTML={{ __html: post.body.slice(0, 250) + "... <p class='text-indigo-700 text-underline'>Read More<p>"}}>
+                 
                 </p>
               </div>
               <div class="px-6 pt-4 pb-2">
                 <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                  #news
+                  #{post.tag || 'News'}
                 </span>
                
               </div>
