@@ -92,7 +92,8 @@ function Create() {
                 <input
                   id="red-radio"
                   type="radio"
-                  value=""
+                  value='campaign'
+                  onChange={handleTag}
                   name="colored-radio"
                   class="campaign"
                 />
@@ -108,6 +109,7 @@ function Create() {
                   id="green-radio"
                   type="radio"
                   value="advert"
+                  onChange={handleTag}
                   name="colored-radio"
                   class="custom-radio"
                 />
