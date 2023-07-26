@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import NavBar from "../components/NavBar";
 import BlogCard from "../components/BlogCard";
 import { useNavigate } from "react-router";
 
-
 function News() {
-    const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [searchValue, setSearchValue] = useState("");
   return (
     <div>
       {/* <Nav /> */}
@@ -18,16 +18,52 @@ function News() {
             {/* <button class="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm font-medium rounded-full">
 	Default Button
   </button> */}
-            <span class="inline-block px-5 py-2 bg-gray-200 hover:bg-gray-300  bg-gray-200 rounded-full text-md font-semibold text-gray-700 mr-2 mb-2 pointer">
+            <span
+              className={`inline-block px-5 py-2 bg-gray-200 hover:bg-indigo-600 hover:text-white rounded-full text-md font-semibold  mr-2 mb-2 pointer ${
+                searchValue === ""
+                  ? "bg-indigo-700 text-white"
+                  : "bg-gray-200 text-gray-700"
+              }`}
+              onClick={() => {
+                setSearchValue("");
+              }}
+            >
               All
             </span>
-            <span class="inline-block px-5 py-2 bg-gray-200 hover:bg-gray-300  bg-gray-200 rounded-full text-md font-semibold text-gray-700 mr-2 mb-2 pointer">
+            <span
+              className={`inline-block px-5 py-2 bg-gray-200 hover:bg-indigo-600 hover:text-white rounded-full text-md font-semibold  mr-2 mb-2 pointer ${
+                searchValue === "news"
+                  ? "bg-indigo-700 text-white"
+                  : "bg-gray-200 text-gray-700"
+              }`}
+              onClick={() => {
+                setSearchValue("news");
+              }}
+            >
               News
             </span>
-            <span class="inline-block px-5 py-2 bg-gray-200 hover:bg-gray-300  bg-gray-200 rounded-full text-md font-semibold text-gray-700 mr-2 mb-2 pointer">
+            <span
+              className={`inline-block px-5 py-2 bg-gray-200 hover:bg-indigo-600 hover:text-white rounded-full text-md font-semibold  mr-2 mb-2 pointer ${
+                searchValue === "advert"
+                  ? "bg-indigo-700 text-white"
+                  : "bg-gray-200 text-gray-700"
+              }`}
+              onClick={() => {
+                setSearchValue("advert");
+              }}
+            >
               Adverts
             </span>
-            <span class="inline-block px-5 py-2 bg-gray-200 hover:bg-gray-300  bg-gray-200 rounded-full text-md font-semibold text-gray-700 mr-2 mb-2 pointer">
+            <span
+              className={`inline-block px-5 py-2 bg-gray-200 hover:bg-indigo-600 hover:text-white rounded-full text-md font-semibold  mr-2 mb-2 pointer ${
+                searchValue === "campaign"
+                  ? "bg-indigo-700 text-white"
+                  : "bg-gray-200 text-gray-700"
+              }`}
+              onClick={() => {
+                setSearchValue("campaign");
+              }}
+            >
               Campaigns
             </span>
           </div>
@@ -40,8 +76,9 @@ function News() {
               onClick={() => {
                 navigate(`/post/1}`);
               }}
+              searchValue={searchValue}
             />
-            <BlogCard  />
+            {/* <BlogCard searchValue={searchValue}/> */}
           </div>
         </div>
       </div>
