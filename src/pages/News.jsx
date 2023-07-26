@@ -22,10 +22,13 @@ function News() {
               All
             </span>
             <span class="inline-block px-5 py-2 bg-gray-200 hover:bg-gray-300  bg-gray-200 rounded-full text-md font-semibold text-gray-700 mr-2 mb-2 pointer">
-              Recent
+              News
             </span>
             <span class="inline-block px-5 py-2 bg-gray-200 hover:bg-gray-300  bg-gray-200 rounded-full text-md font-semibold text-gray-700 mr-2 mb-2 pointer">
-              Top
+              Adverts
+            </span>
+            <span class="inline-block px-5 py-2 bg-gray-200 hover:bg-gray-300  bg-gray-200 rounded-full text-md font-semibold text-gray-700 mr-2 mb-2 pointer">
+              Campaigns
             </span>
           </div>
           {/* <h5 className="text-center text-white">

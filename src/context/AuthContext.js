@@ -41,7 +41,7 @@ export function AuthProvider({ children }) {
         const getData = async () => {
           try {
             if (currentUser) {
-              const docRef = doc(db, "users", currentUser?.uid);
+              const docRef = doc(db, "users", currentUser.uid);
               const docSnap = await getDoc(docRef);
     
               if (docSnap.exists()) {
@@ -55,8 +55,8 @@ export function AuthProvider({ children }) {
           }
         };
     
-        getData();
-      }, []);
+       currentUser && getData();
+      }, [currentUser]);
 
       console.log(userData);
 
