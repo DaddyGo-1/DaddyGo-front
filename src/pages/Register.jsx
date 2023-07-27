@@ -8,7 +8,7 @@ import { db } from "../firebase";
 import logo from '../assets/images/Nuesa.jpg';
 
 const Register = (props) => {
-  const [user, setUser] = useState({ name: "", email: "", password: "" });
+  const [user, setUser] = useState({ name: "", email: "", password: "", username: "" });
   const [errors, setErrors] = useState({});
 
   const schema = {
@@ -29,7 +29,7 @@ const Register = (props) => {
 
     if (!result.error) return null;
 
-    const errors = {};
+    // const errors = {};
     for (let item of result.error.details) {
       errors[item.path[0]] = item.message;
     }
@@ -51,7 +51,8 @@ const Register = (props) => {
 
       await setDoc(doc(db, "users", Uid[0]), {
         name: user.name,
-        email: user.name,
+        email: user.email,
+        username: user.username,
         admin: false,
       });
 
@@ -98,6 +99,25 @@ const Register = (props) => {
                   name="name"
                   type="text"
                   autoComplete="name"
+                  onChange={handleChange}
+                  required
+                  className="block w-full rounded-md border px-3 py-2 text-gray-900 focus:border focus:border-indigo-500 focus:outline-none"
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Username
+              </label>
+              <div className="mt-2">
+                <input
+                  id="username"
+                  name="username"
+                  type="text"
+                  autoComplete="username"
                   onChange={handleChange}
                   required
                   className="block w-full rounded-md border px-3 py-2 text-gray-900 focus:border focus:border-indigo-500 focus:outline-none"
