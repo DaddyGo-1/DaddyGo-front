@@ -4,6 +4,7 @@
 // components
 @import './components/nav';
 @import './components/blog-card';
+@import '../../../node_modules/bootstrap/scss/carousel';
 
 
 
@@ -43,3 +44,24 @@ input[type="radio"] {
   label {
     cursor: pointer;
   }
+  .overlay {
+    /* Customize overlay styles here */
+    background-color: rgba(0, 0, 0, 0.7);
+    // color: white;
+    // padding: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+  .visually-hidden{
+    display: none;
+  }
+  .carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: black !important;
+  border-radius: 50% !important;
+}
+.carousel-inner{
+  border-radius: 20px;
+}
