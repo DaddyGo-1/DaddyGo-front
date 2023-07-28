@@ -50,7 +50,7 @@ const RequestAccess = (props) => {
 
     try {
       await sendAdminEmail();
-      navigate("/");
+      // navigate("/");
     } catch (error) {
       console.log(error);
       //   setErrors(error)
@@ -104,6 +104,7 @@ const RequestAccess = (props) => {
         }
       );
   }
+  console.log(process.env.REACT_APP_EMAILJS_TEMPLATE_ID);
 
   // render() {
   return (
