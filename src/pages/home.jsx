@@ -11,7 +11,9 @@ function HomePage() {
   useEffect(() => {
     const handleBeforeInstallPrompt = (e) => {
       e.preventDefault();
-      setDeferredPrompt(e); // Save the event object in the state
+      setDeferredPrompt(e);
+      console.log(deferredPrompt);
+      // Save the event object in the state
     };
 
     window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
@@ -19,9 +21,10 @@ function HomePage() {
     return () => {
       window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
     };
-  }, []);
+  }, [deferredPrompt]);
 
   const handleInstallClick = () => {
+    console.log('working');
     if (deferredPrompt) {
       deferredPrompt.prompt();
       deferredPrompt.userChoice.then((choiceResult) => {
@@ -56,13 +59,12 @@ function HomePage() {
               >
                 Join
               </Link>
-              {/* <button className="text-white bg-indigo-600 hover:bg-indigo-500 font-medium rounded-lg text-md px-10 py-2 text-center mr-2  dark:bg-indigo-600 dark:hover:bg-indigo-700">
-                  Join
-                </button> */}
+            
               <button
                 className="bg-gray-200  font-medium rounded-lg text-md px-10 py-2 text-center md:mr-0 hover:bg-indigo-600 hover:text-white"
-                onClick={
-                  handleInstallClick}
+                onClick={ ()=>{
+                  handleInstallClick();
+                }}
               >
                 Download
               </button>
