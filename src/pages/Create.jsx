@@ -76,7 +76,6 @@ function Create() {
     <div>
       {/* <Nav /> */}
       <NavBar />
-      {/* <RequestAccess/> */}
      {
       isAdmin ? 
       //create seperate component for this
