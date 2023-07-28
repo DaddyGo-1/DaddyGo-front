@@ -6,35 +6,33 @@ import CarouselComponent from "../components/Carousel";
 function HomePage() {
   // const [deferredPrompt, setDeferredPrompt] = useState(null);
 
-  useEffect(() => {
-    let deferredPrompt;
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
 
+  useEffect(() => {
     const handleBeforeInstallPrompt = (e) => {
       e.preventDefault();
-      deferredPrompt = e;
+      setDeferredPrompt(e); // Save the event object in the state
     };
 
     window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
 
     return () => {
-      window.removeEventListener(
-        "beforeinstallprompt",
-        handleBeforeInstallPrompt
-      );
+      window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
     };
   }, []);
-  const handleInstallClick = () => {
-    const deferredPrompt = window.deferredPrompt;
 
+  const handleInstallClick = () => {
     if (deferredPrompt) {
       deferredPrompt.prompt();
       deferredPrompt.userChoice.then((choiceResult) => {
         if (choiceResult.outcome === "accepted") {
           console.log("PWA installed");
         }
+        setDeferredPrompt(null); // Reset the deferredPrompt state after prompting
       });
     }
   };
+
   return (
     <div>
       {/* <Nav /> */}
@@ -63,9 +61,8 @@ function HomePage() {
                 </button> */}
               <button
                 className="bg-gray-200  font-medium rounded-lg text-md px-10 py-2 text-center md:mr-0 hover:bg-indigo-600 hover:text-white"
-                onClick={() => {
-                  handleInstallClick();
-                }}
+                onClick={
+                  handleInstallClick}
               >
                 Download
               </button>

@@ -1,7 +1,7 @@
 {
     "headers": [
       {
-        "source": "/src/ServiceWorker.js",
+        "source": "/ServiceWorker.js",
         "headers": [
           {
             "key": "Content-Type",
