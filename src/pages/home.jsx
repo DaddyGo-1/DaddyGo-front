@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import CarouselComponent from "../components/Carousel";
+import InstallPWA from "../components/Button";
 
 function HomePage() {
   // const [deferredPrompt, setDeferredPrompt] = useState(null);
@@ -115,9 +116,10 @@ function HomePage() {
               from your home screen.
             </p>
             <div class="space-y-4 sm:flex sm:space-y-0 sm:space-x-4 mb-4">
-              <button className="bg-gray-200  font-medium rounded-lg text-md px-10 py-2 text-center md:mr-0 hover:bg-indigo-600 hover:text-white">
+              {/* <button className="bg-gray-200  font-medium rounded-lg text-md px-10 py-2 text-center md:mr-0 hover:bg-indigo-600 hover:text-white">
                 Download
-              </button>
+              </button> */}
+              <InstallPWA/>
             </div>
           </div>
           <div class=" lg:mt-0 lg:col-span-5 lg:flex">
