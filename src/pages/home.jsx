@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import CarouselComponent from "../components/Carousel";
 import InstallPWA from "../components/Button";
+import phone from "../assets/images/phone.png";
 
 function HomePage() {
   // const [deferredPrompt, setDeferredPrompt] = useState(null);
@@ -20,12 +21,15 @@ function HomePage() {
     window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
 
     return () => {
-      window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+      window.removeEventListener(
+        "beforeinstallprompt",
+        handleBeforeInstallPrompt
+      );
     };
   }, [deferredPrompt]);
 
   const handleInstallClick = () => {
-    console.log('working');
+    console.log("working");
     if (deferredPrompt) {
       deferredPrompt.prompt();
       deferredPrompt.userChoice.then((choiceResult) => {
@@ -60,10 +64,10 @@ function HomePage() {
               >
                 Join
               </Link>
-            
+
               <button
                 className="bg-gray-200  font-medium rounded-lg text-md px-10 py-2 text-center md:mr-0 hover:bg-indigo-600 hover:text-white"
-                onClick={ ()=>{
+                onClick={() => {
                   handleInstallClick();
                 }}
               >
@@ -93,7 +97,7 @@ function HomePage() {
               centric and an embodiment of excellence, from cloth vendors to
               crypto exchnges Nuesans have got you covered.
             </p>
-            <div class="space-y-4 sm:flex sm:space-y-0 sm:space-x-4 mb-4">
+            <div class="space-y-4 sm:flex sm:space-y-0 sm:space-x-4 mb-5">
               <Link
                 to="/discover"
                 className="text-white bg-indigo-600 hover:bg-indigo-500 font-medium rounded-lg text-md px-10 py-2 text-center mr-2  dark:bg-indigo-600 dark:hover:bg-indigo-700"
@@ -116,15 +120,20 @@ function HomePage() {
               from your home screen.
             </p>
             <div class="space-y-4 sm:flex sm:space-y-0 sm:space-x-4 mb-4">
-              {/* <button className="bg-gray-200  font-medium rounded-lg text-md px-10 py-2 text-center md:mr-0 hover:bg-indigo-600 hover:text-white">
+              <button className="bg-gray-200  font-medium rounded-lg text-md px-10 py-2 text-center md:mr-0 hover:bg-indigo-600 hover:text-white hidden sm:block">
                 Download
-              </button> */}
-              <InstallPWA/>
+              </button>
+              {/* <InstallPWA/> */}
             </div>
           </div>
           <div class=" lg:mt-0 lg:col-span-5 lg:flex">
-            {/* <img src={hero} alt="heroimage"/> */}
-            <CarouselComponent />
+            <img src={phone} alt="heroimage" />
+            {/* <CarouselComponent /> */}
+          </div>
+          <div class="space-y-4 sm:flex sm:space-y-0 sm:space-x-4 my-4 mx-auto xs:mx-10">
+            <button className="bg-gray-200  font-medium rounded-lg text-md px-10 py-2 text-center md:mr-0 hover:bg-indigo-600 hover:text-white block sm:hidden">
+              Download
+            </button>
           </div>
         </div>
       </section>

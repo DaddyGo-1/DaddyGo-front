@@ -65,7 +65,7 @@ function Create() {
         tag: tag,
       }).then(
         console.log("sucessful", `postid:${docRef.id}`),
-        navigate("/news")
+        navigate("/discover")
       );
     } catch (error) {
       console.log(error);
