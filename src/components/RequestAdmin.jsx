@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Joi from "joi-browser";
-import { useNavigate } from "react-router";
+// import Joi from "joi-browser";
+// import { useNavigate } from "react-router";
 import { useAuth } from "../context/AuthContext";
 import NotificationModal from "./Modals/NotificationModal";
 
@@ -102,22 +102,22 @@ function RequestAccess() {
     setModalShow(!modalShow);
     setRequestSent(true);
     localStorage.setItem("requestSent", true);
-    // emailjs
-    //   .send(
-    //     process.env.REACT_APP_EMAILJS_SERVICE_ID,
-    //     process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
-    //     templateParams,
-    //     process.env.REACT_APP_EMAILJS_KEY
-    //   )
-    //   .then(
-    //     function (response) {
-    //       console.log("SUCCESS!", response.status, response.text);
+    emailjs
+      .send(
+        process.env.REACT_APP_EMAILJS_SERVICE_ID,
+        process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
+        templateParams,
+        process.env.REACT_APP_EMAILJS_KEY
+      )
+      .then(
+        function (response) {
+          console.log("SUCCESS!", response.status, response.text);
         
-    //     },
-    //     function (error) {
-    //       console.log("FAILED...", error);
-    //     }
-    //   );
+        },
+        function (error) {
+          console.log("FAILED...", error);
+        }
+      );
   }
 
   // render() {
