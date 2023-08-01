@@ -52,23 +52,24 @@ function FullPost() {
                 <h2 className="text-4xl font-semibold text-gray-100 leading-tight">
                   {data.title}
                 </h2>
-                {/* <div className="flex mt-3">
+                <div className="flex mt-3">
                   <img
-                    src="https://randomuser.me/api/portraits/men/97.jpg"
+                    src={"https://media.istockphoto.com/id/1209654046/vector/user-avatar-profile-icon-black-vector-illustration.jpg?s=612x612&w=0&k=20&c=EOYXACjtZmZQ5IsZ0UUp1iNmZ9q2xl1BD1VvN6tZ2UI="}
                     className="h-10 w-10 rounded-full mr-2 object-cover"
                     alt=""
                   />
                   <div>
                     <p className="font-semibold text-gray-200 text-sm">
                       {" "}
-                      Mike Sullivan{" "}
+                      {data.creator?.name || 'untitled'}{" "}
                     </p>
                     <p className="font-semibold text-gray-400 text-xs">
-                      {" "}
-                      14 Aug{" "}
+                      {/* {" "}
+                      14 Aug{" "} */}
+                       @{data.creator?.username || 'untitled'}{" "}
                     </p>
                   </div>
-                </div> */}
+                </div>
               </div>
             </div>
 
