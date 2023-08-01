@@ -42,15 +42,21 @@
   </body>
   <script>
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function() {
-        navigator.serviceWorker.register('svcWorker.js').then(function(registration) {
+   try {
+    window.addEventListener('load', function() {
+        navigator.serviceWorker.register('svcWorker.js')
+        .then(function(registration) {
           console.log('Worker registration is successful', registration.scope);
-        }, function(err) {
+        }, 
+        function(err) {
           console.log('Worker registration has failed', err);
         }).catch(function(err) {
           console.log(err);
         });
       });
+   } catch (error) {
+    console.log(error);
+   }
     } else {
       console.log('Service Worker is not supported by your browser.');
     }
