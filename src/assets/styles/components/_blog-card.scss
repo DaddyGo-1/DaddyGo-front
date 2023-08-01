@@ -1,4 +1,21 @@
-.image-container{
-    height: 200px;
-    overflow: hidden;
+.blogCard{
+    height: 500px;
+    position: relative;
+    .image-container{
+        height: 200px;
+        overflow: hidden;
+    }
+    .text-container{
+        height: 100px;
+        overflow: hidden;
+    }
+    .tag-container{
+    position: absolute;
+    bottom: 20px;
+    }
+    .read-more{
+        position: absolute;
+        top: 380px;  
+    }
 }
+

@@ -27,7 +27,7 @@ function BlogCard({ searchValue }) {
       ) : (
         search(data).map((post, index) => (
           <div
-            class="rounded-xl overflow-hidden shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300 pointer bg-white"
+            class="rounded-xl overflow-hidden shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300 pointer bg-white blogCard"
             onClick={() => {
               navigate(`/post/${post.id}`);
             }}
@@ -39,15 +39,16 @@ function BlogCard({ searchValue }) {
             <div class="px-6 py-4">
               <div class="font-bold text-xl mb-2">{post.title}</div>
               <p
-                class="text-gray-700 text-base"
+                class="text-gray-700 text-base text-container"
                 dangerouslySetInnerHTML={{
                   __html:
-                    post.body.slice(0, 250) +
-                    "... <p class='text-indigo-700 text-underline'>Read More<p>",
+                    post.body.slice(3, 300) +
+                    "... ",
                 }}
-              ></p>
+              onLoad={()=>{console.log(post.body.textContent);}}></p>
             </div>
-            <div class="px-6 pt-4 pb-2">
+            <p class='text-indigo-700 text-underline px-6 read-more'>Read More</p>
+            <div class="px-6 pt-4 pb-2 tag-container">
               <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
                 #{post.tag || "News"}
               </span>
