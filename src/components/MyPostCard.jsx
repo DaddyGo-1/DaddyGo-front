@@ -1,32 +1,32 @@
 import React from "react";
 import { useNavigate } from "react-router";
-import { usePosts } from "../context/PostsContext";
+import { useUserPosts } from "../context/UserPostContext";
 
-function BlogCard({ searchValue }) {
+function MyPostCard({ searchValue }) {
   const navigate = useNavigate();
-  const { posts } = usePosts();
+  const { userPosts } = useUserPosts();
 
-  const data = Object.values(posts);
-  const search_parameters = ["tag", "creatorID"];
-  function search(post) {
-    return post.filter((item) =>
-      search_parameters.some((parameter) =>
-        item[parameter]?.toLowerCase().includes(searchValue)
-      )
-    );
-  }
-  console.log(searchValue);
-  const filteredPosts = search(posts, searchValue);
-  console.log(filteredPosts);
+//   const data = Object.values(posts);
+//   const search_parameters = ["tag", "creatorID"];
+//   function search(post) {
+//     return post.filter((item) =>
+//       search_parameters.some((parameter) =>
+//         item[parameter]?.toLowerCase().includes(searchValue)
+//       )
+//     );
+//   }
+//   console.log(searchValue);
+//   const filteredPosts = search(posts, searchValue);
+//   console.log(filteredPosts);
 
   return (
     <>
-      {posts && filteredPosts.length < 1 ? (
+      {userPosts < 1 ? (
         <h2 className="text-2xl text-white mx-auto"  style={{position: 'absolute', width:'fit-content', left: 0, right:0}}>
-         There are no posts in this category
+         You have not uploaded any posts
         </h2>
       ) : (
-        search(data).map((post, index) => (
+        userPosts.map((post, index) => (
           <div
             class="rounded-xl overflow-hidden shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300 pointer bg-white blogCard"
             onClick={() => {
@@ -62,4 +62,5 @@ function BlogCard({ searchValue }) {
   );
 }
 
-export default BlogCard;
+
+export default MyPostCard;

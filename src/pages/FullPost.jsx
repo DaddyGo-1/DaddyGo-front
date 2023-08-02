@@ -49,7 +49,7 @@ function FullPost() {
                 alt=""
               />
               <div className="p-4 absolute bottom-0 left-0 z-10">
-                <h2 className="text-4xl font-semibold text-gray-100 leading-tight">
+                <h2 className="text-2xl sm:text-4xl font-semibold text-gray-100 leading-tight">
                   {data.title}
                 </h2>
                 <div className="flex mt-3">

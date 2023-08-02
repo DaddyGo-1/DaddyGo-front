@@ -96,9 +96,14 @@ function NavBar(props) {
               <CustomLink to="/discover">Discover</CustomLink>
             </li>
             {currentUser ? (
+              <>
               <li>
                 <CustomLink to="/create">Create</CustomLink>
               </li>
+                <li>
+                <CustomLink to="/my-posts">My Posts</CustomLink>
+              </li>
+              </>
             ) : (
               ""
             )}
