@@ -10,6 +10,7 @@ import News from "./pages/News";
 import Adverts from "./pages/Adverts";
 import FullPost from "./pages/FullPost";
 import Create from "./pages/Create";
+import MyPosts from "./pages/MyPosts";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path='/register' element={<Register />} />
             <Route path='/login' element={<LoginForm />} />
             <Route path='/discover' element={<News />} />
+            <Route path='/my-posts' element={<MyPosts />} />
             <Route path='/adverts' element={<Adverts />} />
             <Route path='/create' element={<Create />} />
             <Route path='post/:id' element={<FullPost />} />

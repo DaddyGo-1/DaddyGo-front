@@ -59,7 +59,12 @@ function Create() {
       await setDoc(docRef, {
         title: title,
         body: body,
-        creator: userData,
+        creator: {
+          name: userData.name,
+          email: userData.email,
+          username: userData.username,
+        },
+        creator_id: currentUser.uid,
         image: downloadURL,
         created: serverTimestamp(),
         tag: tag,

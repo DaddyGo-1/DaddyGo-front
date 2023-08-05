@@ -7,7 +7,7 @@ function BlogCard({ searchValue }) {
   const { posts } = usePosts();
 
   const data = Object.values(posts);
-  const search_parameters = ["tag"];
+  const search_parameters = ["tag", "creatorID"];
   function search(post) {
     return post.filter((item) =>
       search_parameters.some((parameter) =>
@@ -15,6 +15,7 @@ function BlogCard({ searchValue }) {
       )
     );
   }
+  console.log(searchValue);
   const filteredPosts = search(posts, searchValue);
   console.log(filteredPosts);
 
