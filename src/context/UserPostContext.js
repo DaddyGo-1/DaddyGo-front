@@ -15,7 +15,7 @@ export function UserPostsProvider({ children }) {
   console.log(currentUser?.uid);
 
   useEffect(() => {
-    const q = query(collection(db, 'posts'), where("creator_id", "==", currentUser?.uid || ""));
+    const q = query(collection(db, 'posts'), where("creator_id", "==", 'giAvGUBi0JhoiPBxZ4U2sTxrQRp1'|| ""));
     const unsub = onSnapshot(q, (snapshot) => {
         let list = [];
         snapshot.docs.forEach((doc) => {
