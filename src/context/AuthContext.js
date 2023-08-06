@@ -20,9 +20,11 @@ export function AuthProvider({ children }) {
         const res = await createUserWithEmailAndPassword(auth, email, password);
         Uid.push(res.user.uid)
         console.log(Uid);
+        localStorage.setItem('userID', res.user.uid)
     }
-    function logIn(email, password) {
-        return signInWithEmailAndPassword(auth, email, password)
+    async function logIn(email, password) {
+        const res  = await signInWithEmailAndPassword(auth, email, password)
+        localStorage.setItem('userID', res.user.uid)
     }
     function logOut() {
         return signOut(auth)
@@ -31,6 +33,7 @@ export function AuthProvider({ children }) {
     useEffect(() => {
         const unsub = onAuthStateChanged(auth, (user) => {
             setCurrentUser(user);
+            localStorage.setItem('userID', currentUser?.uid)
             // setLoading(false);
         })
         return () => {
@@ -42,6 +45,7 @@ export function AuthProvider({ children }) {
           try {
             if (currentUser) {
               const docRef = doc(db, "users", currentUser.uid);
+              localStorage.setItem('userID', currentUser.uid)
               const docSnap = await getDoc(docRef);
     
               if (docSnap.exists()) {
@@ -59,6 +63,7 @@ export function AuthProvider({ children }) {
       }, [currentUser]);
 
       console.log(userData);
+      const userID = localStorage.getItem("userID")
 
     const value = {
         currentUser,
@@ -66,7 +71,8 @@ export function AuthProvider({ children }) {
         logIn,
         logOut,
         Uid,
-        userData
+        userData, 
+        userID
 
 
     }

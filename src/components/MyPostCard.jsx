@@ -61,11 +61,9 @@ function MyPostCard({ searchValue }) {
                 <p
                   class="text-gray-700 text-base text-container"
                   dangerouslySetInnerHTML={{
-                    __html: post.body.slice(3, 300) + "... ",
+                    __html: post.body.slice(0, 200) + "... ",
                   }}
-                  onLoad={() => {
-                    console.log(post.body.textContent);
-                  }}
+                
                 ></p>
               </div>
               <p class="text-indigo-700 text-underline px-6 read-more">
