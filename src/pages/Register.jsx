@@ -6,62 +6,46 @@ import { useAuth } from "../context/AuthContext";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import logo from '../assets/images/Nuesa.jpg';
+import { SpinnerSM } from "../components/Spinners";
+import Validation from "../utilities/validateInputFields";
 
 const Register = (props) => {
   const [user, setUser] = useState({ name: "", email: "", password: "", username: "" });
   const [errors, setErrors] = useState({});
-
-  const schema = {
-    name: Joi.string().required().min(5).label("Username"),
-    id: Joi.string().required().min(2).label("id"),
-    password: Joi.string().required().min(5).label("Password"),
-    text: Joi.string().required().min(5).label("Text"),
-    job: Joi.string().required().min(5).max(15).label("Job"),
-  };
+  const [loading, setLoading] = useState(false);
 
   const { signUp, Uid } = useAuth();
   const navigate = useNavigate();
 
-  const validate = () => {
-    const result = Joi.validate(user, schema, {
-      abortEarly: false,
-    });
-
-    if (!result.error) return null;
-
-    // const errors = {};
-    for (let item of result.error.details) {
-      errors[item.path[0]] = item.message;
-    }
-    return errors;
-  };
-
-  const validateProperty = (input) => {
-    const obj = { [input.name]: input.value };
-    const schema = { [input.name]: schema[input.name] };
-    const { error } = Joi.validate(obj, schema);
-    return error ? error.details[0].message : null;
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    try {
-      await signUp(user.email, user.password);
-
-      await setDoc(doc(db, "users", Uid[0]), {
-        name: user.name,
-        email: user.email,
-        username: user.username,
-        admin: false,
-      });
-
-      // Perform redirection after successful registration
-      navigate("/");
-    } catch (error) {
-      console.log(error);
-      setErrors(error)
+    
+    const validationErrors = Validation(user);
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+    } else {
+      setLoading(true)
+      try {
+        await signUp(user.email, user.password);
+        setLoading(false)
+  
+        await setDoc(doc(db, "users", Uid[0]), {
+          name: user.name,
+          email: user.email,
+          username: user.username,
+          admin: false,
+        });
+  
+        // Perform redirection after successful registration
+        navigate("/");
+      } catch (error) {
+        console.log(error);
+        setErrors(error);
+        setLoading(false);
+      }
     }
+
+  
   };
 
   const handleChange = (e) => {
@@ -79,8 +63,8 @@ const Register = (props) => {
             src={logo}
             alt="Your Company"
           />
-          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            Sign in to your account
+          <h2 className="mt-8 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+            Create an account
           </h2>
         </div>
 
@@ -183,9 +167,17 @@ const Register = (props) => {
                 onClick={handleSubmit}
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold leading-6 text-white  hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Register
+                {loading ? <SpinnerSM/> : 'Register'} 
               </button>
             </div>
+            {Object.keys(errors).map((key) => (
+            <div
+              class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+              role="alert"
+            >
+              <span class="block sm:inline">{errors[key]}</span>
+            </div>
+          ))}
             <hr className="my-6 border-gray-300 w-full" />
 
             <button
@@ -203,7 +195,7 @@ const Register = (props) => {
             </button>
           </form>
 
-          <p className="mt-10 text-center text-sm text-gray-500">
+          <p className="mt-10 mb-10 text-center text-sm text-gray-500">
             Already have an account?{" "}
             <Link
               to="/login"

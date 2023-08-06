@@ -9,6 +9,7 @@ import { useImageUpload } from "../context/ImageUploadCOntext";
 import "react-quill/dist/quill.snow.css";
 import ReactQuill from "react-quill";
 import RequestAccess from "../components/RequestAdmin";
+import { SpinnerSM } from "../components/Spinners";
 
 function Create() {
   const [title, setTitle] = useState("");
@@ -17,7 +18,9 @@ function Create() {
   const [tag, setTag] = useState();
   const [isAdmin, setIsAdmin] = useState(false);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const { currentUser, userData } = useAuth();
+  const [error, setError] = useState();
   const {
     image,
     setImage,
@@ -52,6 +55,7 @@ function Create() {
   };
 
   const handleUpload = async () => {
+    setLoading(true)
     try {
       const docRef = doc(collection(db, "posts"));
       sessionStorage.setItem("blogID", docRef.id);
@@ -72,8 +76,11 @@ function Create() {
         console.log("sucessful", `postid:${docRef.id}`),
         navigate("/discover")
       );
+      setLoading(false)
     } catch (error) {
       console.log(error);
+      setError(error)
+      setLoading(false)
     }
   };
  
@@ -182,7 +189,7 @@ function Create() {
                     ) : (
                       <span class="font-medium text-gray-600">
                         Add Cover{" "}
-                        <small>(recommended: landscape images)</small>
+                        <small>(recommended: landscape image)</small>
                       </span>
                     )}
                   </span>
@@ -231,8 +238,17 @@ function Create() {
               }}
             >
               {" "}
-              Submit
+              {loading ? <SpinnerSM/> : 'Submit'} 
             </button>
+            { error ? 
+            <div
+              className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+              role="alert"
+            >
+              <span class="block sm:inline">{error}</span>
+            </div>
+            : ""
+         }
           </div>
         </div>
       </div>

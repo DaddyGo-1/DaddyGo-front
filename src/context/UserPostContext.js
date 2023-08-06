@@ -12,7 +12,7 @@ export function useUserPosts() {
 export function UserPostsProvider({ children }) {
   const [userPosts, setUserPosts] = useState([]);
   const {currentUser, Uid} = useAuth()
-  console.log(currentUser?.uid);
+  // console.log(currentUser?.uid);
 
   useEffect(() => {
     const q = query(collection(db, 'posts'), where("creator_id", "==", currentUser?.uid|| ""));
