@@ -1,10 +1,10 @@
 import Carousel from 'react-bootstrap/Carousel';
-import img1 from '../assets/images/nuesa1.jpg';
-import img2 from '../assets/images/nuesa2.jpg';
-import img3 from '../assets/images/nuesa3.jpg';
+// import img1 from '../assets/images/nuesa1.jpg';
+// import img2 from '../assets/images/nuesa2.jpg';
+// import img3 from '../assets/images/nuesa3.jpg';
 // import 'bootstrap/scss/carousel.scss';
 
-function CarouselComponent() {
+function CarouselComponent({img1, img2, img3}) {
   return (
     <Carousel data-bs-theme="dark">
       <Carousel.Item>
