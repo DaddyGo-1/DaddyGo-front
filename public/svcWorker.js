@@ -1,6 +1,7 @@
 /* eslint-disable no-restricted-globals */
 var CACHE_NAME = 'task-manager-pwa';
 var urlsToCache = [
+  
   // '/',
   // '/completed'
 ];

@@ -126,7 +126,11 @@ function HomePage() {
               from your home screen.
             </p>
             <div class="space-y-4 sm:flex sm:space-y-0 sm:space-x-4 mb-4">
-              <button className="bg-gray-200  font-medium rounded-lg text-md px-10 py-2 text-center md:mr-0 hover:bg-indigo-600 hover:text-white hidden sm:block">
+              <button className="bg-gray-200  font-medium rounded-lg text-md px-10 py-2 text-center md:mr-0 hover:bg-indigo-600 hover:text-white hidden sm:block"
+                onClick={() => {
+                  handleInstallClick();
+                }}
+              >
                 Download
               </button>
               {/* <InstallPWA/> */}
