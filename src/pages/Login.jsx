@@ -10,6 +10,7 @@ import Validation from "../utilities/validateInputFields";
 const LoginForm = (props) => {
   const [user, setUser] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState({});
+  const [authError, setAuthError] = useState();
   const [loading, setLoading] = useState(false);
 
   const { logIn } = useAuth();
@@ -30,7 +31,7 @@ const LoginForm = (props) => {
         console.log(err);
         console.log(err.code);
         setLoading(false);
-        setErrors(err.code)
+        setAuthError(err.code)
         // e.preventDefault();
       }
     }
@@ -122,6 +123,15 @@ const LoginForm = (props) => {
               <span class="block sm:inline">{errors[key]}</span>
             </div>
           ))}
+          {authError?
+            <div
+              class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+              role="alert"
+            >
+              <span class="block sm:inline">{authError}</span>
+            </div>
+            : ""
+         }
 
           <hr className="my-6 border-gray-300 w-full" />
 

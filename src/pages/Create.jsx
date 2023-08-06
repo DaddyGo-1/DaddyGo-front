@@ -15,11 +15,11 @@ function Create() {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [showImage, setShowImage] = useState(null);
-  const [tag, setTag] = useState();
+  const [tag, setTag] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const { currentUser, userData } = useAuth();
+  const { currentUser, userData, userID } = useAuth();
   const [error, setError] = useState();
   const {
     image,
@@ -68,7 +68,7 @@ function Create() {
           email: userData.email,
           username: userData.username,
         },
-        creator_id: currentUser.uid,
+        creator_id: currentUser?.uid || userID,
         image: downloadURL,
         created: serverTimestamp(),
         tag: tag,
@@ -79,7 +79,7 @@ function Create() {
       setLoading(false)
     } catch (error) {
       console.log(error);
-      setError(error)
+      setError(error.code)
       setLoading(false)
     }
   };

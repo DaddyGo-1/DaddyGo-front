@@ -12,6 +12,7 @@ import Validation from "../utilities/validateInputFields";
 const Register = (props) => {
   const [user, setUser] = useState({ name: "", email: "", password: "", username: "" });
   const [errors, setErrors] = useState({});
+  const [authError, setAuthError] = useState();
   const [loading, setLoading] = useState(false);
 
   const { signUp, Uid } = useAuth();
@@ -21,9 +22,9 @@ const Register = (props) => {
     e.preventDefault();
     
     const validationErrors = Validation(user);
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-    } else {
+    // if (Object.keys(validationErrors).length > 0) {
+    //   // setErrors(validationErrors);
+    // } else {
       setLoading(true)
       try {
         await signUp(user.email, user.password);
@@ -40,10 +41,10 @@ const Register = (props) => {
         navigate("/");
       } catch (error) {
         console.log(error);
-        setErrors(error);
+        setAuthError(error.code);
         setLoading(false);
       }
-    }
+    // }
 
   
   };
@@ -175,9 +176,18 @@ const Register = (props) => {
               class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
               role="alert"
             >
-              <span class="block sm:inline">{errors[key]}</span>
+              <span class="block sm:inline">{errors[key]|| errors}</span>
             </div>
           ))}
+             {authError?
+            <div
+              class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+              role="alert"
+            >
+              <span class="block sm:inline">{authError}</span>
+            </div>
+            : ""
+         }
             <hr className="my-6 border-gray-300 w-full" />
 
             <button

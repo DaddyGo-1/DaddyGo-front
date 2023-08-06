@@ -11,11 +11,11 @@ export function useUserPosts() {
 
 export function UserPostsProvider({ children }) {
   const [userPosts, setUserPosts] = useState([]);
-  const {currentUser, Uid} = useAuth()
+  const {currentUser, userID} = useAuth()
   // console.log(currentUser?.uid);
 
   useEffect(() => {
-    const q = query(collection(db, 'posts'), where("creator_id", "==", currentUser?.uid|| ""));
+    const q = query(collection(db, 'posts'), where("creator_id", "==", currentUser?.uid|| userID));
     const unsub = onSnapshot(q, (snapshot) => {
         let list = [];
         snapshot.docs.forEach((doc) => {

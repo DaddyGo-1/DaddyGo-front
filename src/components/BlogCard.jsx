@@ -43,7 +43,7 @@ function BlogCard({ searchValue }) {
                 class="text-gray-700 text-base text-container"
                 dangerouslySetInnerHTML={{
                   __html:
-                    post.body.slice(3, 300) +
+                    post.body.slice(0, 200) +
                     "... ",
                 }}
               onLoad={()=>{console.log(post.body.textContent);}}></p>
