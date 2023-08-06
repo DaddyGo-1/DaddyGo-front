@@ -3,8 +3,10 @@ import React, { useEffect, useState } from "react";
 // import { useNavigate } from "react-router";
 import { useAuth } from "../context/AuthContext";
 import NotificationModal from "./Modals/NotificationModal";
+import Validation from "../utilities/validateInputFields";
 
 import emailjs from "@emailjs/browser";
+import { SpinnerSM } from "./Spinners";
 
 function RequestAccess() {
   const [user, setUser] = useState({
@@ -12,52 +14,33 @@ function RequestAccess() {
     position: "",
     post_type: "",
   });
-  // const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({});
   const [modalShow, setModalShow] = useState(false);
   const [requestSent, setRequestSent] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  // const schema = {
-  //   name: Joi.string().required().min(5).label("Username"),
-  //   id: Joi.string().required().min(2).label("id"),
-  //   password: Joi.string().required().min(5).label("Password"),
-  //   text: Joi.string().required().min(5).label("Text"),
-  //   job: Joi.string().required().min(5).max(15).label("Job"),
-  // };
 
-  const { userData } = useAuth();
-  // const navigate = useNavigate();
+  const { userData, currentUser } = useAuth();
 
-  // const validate = () => {
-  //   const result = Joi.validate(user, schema, {
-  //     abortEarly: false,
-  //   });
-
-  //   if (!result.error) return null;
-
-  //   const errors = {};
-  //   for (let item of result.error.details) {
-  //     errors[item.path[0]] = item.message;
-  //   }
-  //   return errors;
-  // };
-
-  // const validateProperty = (input) => {
-  //   const obj = { [input.name]: input.value };
-  //   const schema = { [input.name]: schema[input.name] };
-  //   const { error } = Joi.validate(obj, schema);
-  //   return error ? error.details[0].message : null;
-  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    const validationErrors = Validation(user);
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+    } else {
+    setLoading(true)
+    
     try {
       await sendAdminEmail();
+      setLoading(false)
       // navigate("/");
     } catch (error) {
       console.log(error);
+      setLoading(false)
       //   setErrors(error)
     }
+  }
   };
 
   const handleChange = (e) => {
@@ -69,7 +52,7 @@ function RequestAccess() {
 
   var templateParams = {
     to_name: `Evans`,
-    message: `${userData.name} of ${user.department} department, is requesting to post ${user.post_type}`,
+    message: `${userData.name}, with the id ${currentUser?.uid} of ${user.department} department, is requesting to post ${user.post_type}`,
     user_email: `daddygo558@gmail.com`,
   };
   // function sendUserEmail() {
@@ -255,10 +238,18 @@ function RequestAccess() {
                 onClick={handleSubmit}
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold leading-6 text-white  hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Request
+                {loading ? <SpinnerSM/> : 'Request'}
               </button>
             </div>
-            <hr className="my-6 border-gray-300 w-full" />
+            {Object.keys(errors).map((key) => (
+            <div
+              class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+              role="alert"
+            >
+              <span class="block sm:inline">{errors[key]}</span>
+            </div>
+          ))}
+            {/* <hr className="my-6 border-gray-300 w-full" /> */}
           </form>
         </div>
       </div>
