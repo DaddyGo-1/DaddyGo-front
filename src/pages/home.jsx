@@ -4,6 +4,12 @@ import NavBar from "../components/NavBar";
 import CarouselComponent from "../components/Carousel";
 import InstallPWA from "../components/Button";
 import phone from "../assets/images/phone.png";
+import img1 from '../assets/images/nuesa1.jpg';
+import img2 from '../assets/images/nuesa2.jpg';
+import img3 from '../assets/images/nuesa3.jpg';
+import brand1 from '../assets/images/brand-1.jpg';
+import brand2 from '../assets/images/brand-2.jpg';
+import brand3 from '../assets/images/brand-3.jpg';
 
 function HomePage() {
   // const [deferredPrompt, setDeferredPrompt] = useState(null);
@@ -77,7 +83,7 @@ function HomePage() {
           </div>
           <div class=" lg:mt-0 lg:col-span-5 lg:flex">
             {/* <img src={hero} alt="heroimage"/> */}
-            <CarouselComponent />
+            <CarouselComponent img1={img1} img2={img2} img3={img3}/>
           </div>
         </div>
       </section>
@@ -85,7 +91,7 @@ function HomePage() {
         <div class="grid max-w-screen-xl px-4 pt-10 pb-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 lg:pt-28">
           <div class=" lg:mt-0 lg:col-span-5 lg:flex order-last lg:order-first">
             {/* <img src={hero} alt="heroimage"/> */}
-            <CarouselComponent />
+            <CarouselComponent  img1={brand1} img2={brand2} img3={brand3}/>
           </div>
           <div class=" mr-auto xl:ml-auto place-self-center lg:col-span-7 order-first lg:order-last">
             <h1 class="max-w-2xl mb-4 text-4xl font-extrabold leading-none tracking-tight md:text-5xl xl:text-6xl text-indigo-700">
