@@ -1,7 +1,7 @@
 /* eslint-disable no-restricted-globals */
 var CACHE_NAME = 'task-manager-pwa';
 var urlsToCache = [
-  '/',
+  // '/',
   // '/completed'
 ];
 
@@ -12,7 +12,7 @@ self.addEventListener('install', event => {
     caches.open(CACHE_NAME)
       .then(function(cache) {
         console.log('Cache opened');
-        return cache.addAll(urlsToCache);
+        // return cache.addAll(urlsToCache);
       })
   );
 });
