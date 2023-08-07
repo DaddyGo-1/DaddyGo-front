@@ -56,7 +56,7 @@ function HomePage() {
           <div class="mr-auto place-self-center lg:col-span-7">
             <h1 class="max-w-2xl mb-4 text-4xl font-extrabold leading-none tracking-tight md:text-5xl xl:text-6xl text-indigo-700">
               Welcome to <br />
-              Axis.
+              Axix.
             </h1>
             <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl">
               As we embrace the spirit of continuous growth and development, we
@@ -141,9 +141,10 @@ function HomePage() {
             {/* <CarouselComponent /> */}
           </div>
           <div class="space-y-4 sm:flex sm:space-y-0 sm:space-x-4 my-4 mx-auto xs:mx-10">
-            <button className="bg-gray-200  font-medium rounded-lg text-md px-10 py-2 text-center md:mr-0 hover:bg-indigo-600 hover:text-white block sm:hidden">
+            {/* <button className="bg-gray-200  font-medium rounded-lg text-md px-10 py-2 text-center md:mr-0 hover:bg-indigo-600 hover:text-white block sm:hidden">
               Download
-            </button>
+            </button> */}
+             <InstallPWA/>
           </div>
         </div>
       </section>
