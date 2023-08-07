@@ -144,9 +144,9 @@ function HomePage() {
             {/* <button className="bg-gray-200  font-medium rounded-lg text-md px-10 py-2 text-center md:mr-0 hover:bg-indigo-600 hover:text-white block sm:hidden">
               Download
             </button> */}
-            <div className="block sm:hidden">
+            {/* <div className="block sm:hidden">
             <InstallPWA/>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
