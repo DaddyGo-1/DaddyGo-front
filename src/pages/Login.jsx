@@ -135,7 +135,7 @@ const LoginForm = (props) => {
 
           <hr className="my-6 border-gray-300 w-full" />
 
-          <button
+          {/* <button
             type="button"
             className="w-full block bg-white hover:bg-gray-100 focus:bg-gray-100 text-gray-900 font-semibold rounded-lg px-4 py-2 border border-gray-300"
           >
@@ -147,7 +147,7 @@ const LoginForm = (props) => {
               ></img>
               <span className="ml-4 ">Log in with Google</span>
             </div>
-          </button>
+          </button> */}
         </form>
 
         <p className="mt-10 text-center text-sm text-gray-500">
