@@ -7,6 +7,7 @@ import Validation from "../utilities/validateInputFields";
 
 import emailjs from "@emailjs/browser";
 import { SpinnerSM } from "./Spinners";
+import RulesOfEngagement from "./Modals/RulesOfEngagement";
 
 function RequestAccess() {
   const [user, setUser] = useState({
@@ -16,6 +17,7 @@ function RequestAccess() {
   });
   const [errors, setErrors] = useState({});
   const [modalShow, setModalShow] = useState(false);
+  const [showRules, setShowRules] = useState(false);
   const [requestSent, setRequestSent] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -231,7 +233,7 @@ function RequestAccess() {
                 />
               </div>
             </div>
-
+          <p className="pointer underline text-indigo-600 text-center" onClick={()=> setShowRules(true)}>Read the rules of engagement</p>
             <div>
               <button
                 type="submit"
@@ -255,6 +257,7 @@ function RequestAccess() {
       </div>
 
       <NotificationModal show={modalShow} onHide={() => setModalShow(false)} />
+      <RulesOfEngagement show={showRules} onHide={()=> setShowRules(false)}/>
     </>
   );
 }
