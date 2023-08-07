@@ -144,35 +144,13 @@ function HomePage() {
             {/* <button className="bg-gray-200  font-medium rounded-lg text-md px-10 py-2 text-center md:mr-0 hover:bg-indigo-600 hover:text-white block sm:hidden">
               Download
             </button> */}
-             <InstallPWA/>
+            <div className="block sm:hidden">
+            <InstallPWA/>
+            </div>
           </div>
         </div>
       </section>
-      {/* <section class="hero">
-          <div class="hero-center">
-            <article class="hero-info">
-              <h1>
-                Realtime school updates in engineering.
-                <p> We dey for u</p>
-              </h1>
-              <p>
-                Connect with thousands of upcoming engineers and leaders at all
-                levels Stripe’s app allow to to get accurate and up-to-date
-                information from the horses mouth as quickly as possible.
-              </p>
-              <NavLink className="" to="/login">
-                <button class="btn">Start now</button>
-              </NavLink>
-            </article>
-            <article class="hero-images">
-              <img src="./images/phone.svg" class="img" alt="" />
-            </article>
-          </div>
-        </section> */}
-
-      {/* <h1 className="mt-36 text-center">
-        Page currently under construction
-        </h1> */}
+   
     </div>
   );
 }
