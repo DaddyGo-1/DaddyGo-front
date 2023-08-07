@@ -22,9 +22,9 @@ export default function Validation(values) {
     if(values.email === '') {
         errors.email = 'Email is required';
     }
-    else if (!emailValidation.test(values.email)) {
-        errors.email = 'Email is not correct'
-    } 
+    // else if (!emailValidation.test(values.email)) {
+    //     errors.email = 'Email is not correct'
+    // } 
     if(values.password === '') {
         errors.password = 'Password is required';
     } 
