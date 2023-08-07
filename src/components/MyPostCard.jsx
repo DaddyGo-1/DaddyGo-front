@@ -71,7 +71,7 @@ function MyPostCard({ searchValue }) {
               </p>
               <div class="px-6 pt-4 pb-2 tag-container flex justify-between w-full">
                 <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                  #{post.tag || "News"}
+                  #{post.tag || "news"}
                 </span>
                 <div
                   onClick={() => {

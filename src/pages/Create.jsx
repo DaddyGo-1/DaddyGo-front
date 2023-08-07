@@ -15,7 +15,7 @@ function Create() {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [showImage, setShowImage] = useState(null);
-  const [tag, setTag] = useState("");
+  const [tag, setTag] = useState("news");
   const [isAdmin, setIsAdmin] = useState(false);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
