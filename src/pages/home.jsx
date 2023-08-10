@@ -10,9 +10,13 @@ import img3 from '../assets/images/nuesa3.jpg';
 import brand1 from '../assets/images/brand-1.jpg';
 import brand2 from '../assets/images/brand-2.jpg';
 import brand3 from '../assets/images/brand-3.jpg';
+import Footer from "../components/footer";
+import DefaultSidebar from "../components/sidebar";
+import { useAuth } from "../context/AuthContext";
 
 function HomePage() {
   // const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const { currentUser } = useAuth();
 
   const [deferredPrompt, setDeferredPrompt] = useState(null);
 
@@ -50,6 +54,7 @@ function HomePage() {
   return (
     <div>
       {/* <Nav /> */}
+      {/* {currentUser && <DefaultSidebar />} */}
       <NavBar />
       <section class="bg-white mt-10">
         <div class="grid max-w-screen-xl px-4 pt-20 pb-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 lg:pt-28">
@@ -150,7 +155,7 @@ function HomePage() {
           </div>
         </div>
       </section>
-   
+   <Footer/>
     </div>
   );
 }

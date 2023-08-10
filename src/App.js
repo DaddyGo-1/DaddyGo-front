@@ -11,6 +11,7 @@ import Adverts from "./pages/Adverts";
 import FullPost from "./pages/FullPost";
 import Create from "./pages/Create";
 import MyPosts from "./pages/MyPosts";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path='/my-posts' element={<MyPosts />} />
             <Route path='/adverts' element={<Adverts />} />
             <Route path='/create' element={<Create />} />
+            <Route path='/profile' element={<Profile />} />
             <Route path='post/:id' element={<FullPost />} />
           </Routes>
         </Router>

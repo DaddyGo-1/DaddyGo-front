@@ -15,7 +15,7 @@ function Create() {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [showImage, setShowImage] = useState(null);
-  const [tag, setTag] = useState("news");
+  const [tag, setTag] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -96,7 +96,7 @@ function Create() {
       {/* <div className="main-layout__top"></div> */}
       <div className="main-layout__main">
         <div className="mx-auto max-w-6xl ">
-          <div className="lg:w-1/2 w-2/3 mx-auto mb-20">
+          <div className="lg:w-1/2 w-5/6 mx-auto mb-20">
             {/* <div className="flex justify-center align-center mb-5"> */}
 
             <div class="flex flex-wrap justify-center mb-5">
@@ -113,7 +113,7 @@ function Create() {
                   for="red-radio"
                   class="ml-2 text-sm font-medium text-gray-900 "
                 >
-                  Campaign Post
+                  Campaign 
                 </label>
               </div>
               <div class="flex items-center mr-4">
@@ -129,13 +129,12 @@ function Create() {
                   for="green-radio"
                   class="ml-2 text-sm font-medium text-gray-900 "
                 >
-                  Advert Post
+                  Advert 
                 </label>
               </div>
               {isAdmin ? (
                 <div class="flex items-center mr-4">
                   <input
-                    checked
                     id="purple-radio"
                     type="radio"
                     value='news'
@@ -147,7 +146,7 @@ function Create() {
                     for="purple-radio"
                     class="ml-2 text-sm font-medium text-gray-900 "
                   >
-                    News Post
+                    News 
                   </label>
                 </div>
               ) : (
@@ -205,7 +204,7 @@ function Create() {
             </div>
             <div className="mb-5">
               <label className="block  font-medium leading-6 text-gray-900">
-                Article Title
+                Post Title
               </label>
               <div className="mt-2">
                 <input
@@ -221,7 +220,7 @@ function Create() {
             </div>
             <div>
               <label className="block  font-medium leading-6 text-gray-900">
-                Article Content
+                Post Content
               </label>
               <div className="mt-2">
                 <ReactQuill

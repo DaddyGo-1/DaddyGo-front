@@ -29,9 +29,9 @@ function MyPostCard({ searchValue }) {
 
   return (
     <>
-      {userPosts < 1 ? (
+      {userPosts.length < 1    ? (
         <h2
-          className="text-2xl text-white mx-auto"
+          className="text-2xl mx-auto"
           style={{
             position: "absolute",
             width: "fit-content",

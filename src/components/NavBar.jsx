@@ -26,17 +26,16 @@ function NavBar(props) {
         <a href="https://flowbite.com/" className="flex items-center">
           <img src={logo} className="h-16 mr-3" alt="Logo" />
         </a>
-        <div className="flex md:order-2">
+        <div className="flex md:order-2 items-center">
           {currentUser ? (
-            <button
-              type="button"
-              className={`text-white bg-indigo-600 hover:bg-indigo-500 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-md px-10 py-2 text-center mr-3 md:mr-0 dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800`}
-              onClick={() => {
-                handleLogOut();
-              }}
-            >
-              Logout
-            </button>
+          <img
+          class="h-auto w-14 rounded-full border-4 border-white pointer"
+          src="https://media.istockphoto.com/id/1209654046/vector/user-avatar-profile-icon-black-vector-illustration.jpg?s=612x612&w=0&k=20&c=EOYXACjtZmZQ5IsZ0UUp1iNmZ9q2xl1BD1VvN6tZ2UI="
+          alt=""
+          onClick={()=>{
+            navigate('/profile')
+          }}
+        />
           ) : (
             <div className="hidden md:flex justify-between ">
               <button className="block   text-white bg-indigo-600 hover:bg-indigo-500 font-medium rounded-lg text-md px-10 py-2 text-center mr-3  dark:bg-indigo-600 dark:hover:bg-indigo-700
@@ -100,9 +99,9 @@ function NavBar(props) {
               <li>
                 <CustomLink to="/create">Create</CustomLink>
               </li>
-                <li>
+                {/* <li>
                 <CustomLink to="/my-posts">My Posts</CustomLink>
-              </li>
+              </li> */}
               </>
             ) : (
               ""
